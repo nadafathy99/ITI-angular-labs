@@ -34,5 +34,6 @@
 
 <input [(ngModel)]="ClientName" type="text" class="form-control" placeholder="Username" aria-label="Username">
 <button type="button" class="btn btn-success" (click)="IsPurshased=!IsPurshased">BUY</button>
+<button type="button" class="btn btn-success mx-3" (click)=" renderValues()">display data</button>
 
 <p *ngIf="IsPurshased==true">{{"Thanks for purchasing from our Store " + ClientName}}</p>
