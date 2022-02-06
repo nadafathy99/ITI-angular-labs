@@ -1,0 +1,14 @@
+<div *ngIf="details?.length!=0" class="container ">
+  <h1>Comments of post #{{id}}</h1>
+  <div class="row  ">
+    <div *ngFor="let detail of details" class="col-12 my-2">
+      <div class="bg-light">
+        <p>Id: {{detail.id}}</p>
+        <p>Email: {{detail.email}}</p>
+        <div>
+          <span>Body: {{detail.body}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-success" (click)="back()">Back</button>

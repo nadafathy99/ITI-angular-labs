@@ -11,4 +11,7 @@ export class PostsService {
   getAllPosts():Observable<Ipost[]>{
     return this.httpClient.get<Ipost[]>('https://jsonplaceholder.typicode.com/posts');
   }
+  getPost(id:string){
+    return this.httpClient.get<Ipost[]>(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+  }
 }

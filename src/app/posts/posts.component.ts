@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { PostsService } from './../services/posts.service';
 import { Ipost } from './../shared-classes-and-types/ipost';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,17 @@ import { Component, OnInit } from '@angular/core';
 export class PostsComponent implements OnInit {
   posts!:Ipost[]
   errMsg!:string
-  constructor(private postsService:PostsService) { }
+  id!:number
+  constructor(private postsService:PostsService, private route: ActivatedRoute) { }
+  ngOnInit(): void {
+    this.displayPosts();
+    this.route.paramMap.subscribe((param)=>{
+      const id = param.get('id');
+      if (id){
+        this.id= Number(id);
+      }
+    });
+  }
   displayPosts(){
     this.postsService.getAllPosts().subscribe(
       data=>{
@@ -21,9 +32,11 @@ export class PostsComponent implements OnInit {
       }
     )
   }
-
-  ngOnInit(): void {
-    this.displayPosts();
+  isSelected(id:number){
+    console.log(this.id==id)
+    return this.id== id;
   }
+
+ 
 
 }

@@ -1,11 +1,18 @@
 <div *ngIf="errMsg">{{errMsg}}</div>
-<div *ngIf="posts?.length!=0" class="container my-2">
-  <div class="row  ">
-    <div *ngFor="let post of posts" class="col-6 ">
-      <div class="bg-light">
+<div *ngIf="posts?.length!=0" class="container ">
+  <div class="row ">
+    <h1>POSTS</h1>
+    <div *ngFor="let post of posts" class="col-6 my-2">
+      <div class="bg-light" [class.selected]="isSelected(post.id)">
         <p>Id: {{post.id}}</p>
         <p>Title: {{post.title}}</p>
-        <p>Body: {{post.body}}</p>
+        <div>
+          <span>Body: {{post.body}}</span>
+          <!-- <a> See More</a> -->
+        </div>
+        
+        <button [routerLink]="['/posts',post.id,'comments']" type="button" class="btn btn-success ">Show
+          comments</button>
       </div>
     </div>
   </div>

@@ -1,39 +1,47 @@
-<h1>{{StoreName | uppercase}}</h1>
-<img [src]='StoreLogo'>
-<h3 *ngIf="Discount!='No discount'">We offer an explicit discount of: {{Discount| percent}}</h3>
-<!-- {{Discount | currency}} -->
-<div class="dropdown my-2">
-  <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-    aria-expanded="false">
-    Product category
-  </a>
+<div class="container">
+  <h1>{{StoreName | uppercase}}</h1>
+  <img [src]='StoreLogo'>
+  <h3 *ngIf="Discount!='No discount'">We offer an explicit discount of: {{Discount| percent}}</h3>
+  <!-- {{Discount | currency}} -->
+  <div class="dropdown my-2">
+    <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      Product category
+    </a>
 
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <li *ngFor="let category of CategoryList"><a class="dropdown-item">{{category.Name}}</a></li>
-  </ul>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <li *ngFor="let category of CategoryList"><a class="dropdown-item">{{category.Name}}</a></li>
+    </ul>
+  </div>
+
+  <table *ngIf="IsPurshased==false" class="table my-3">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of ProductList">
+        <td>{{product.ID}}</td>
+        <td>{{product.Name}}</td>
+        <td>{{product.Quantity}}</td>
+        <td>{{product.Price}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <input [(ngModel)]="ClientName" type="text" class="form-control" placeholder="Username" aria-label="Username">
+  <br>
+  <button type="button" class="btn btn-success mx-2" (click)="IsPurshased=!IsPurshased">BUY</button>
+  <p *ngIf="IsPurshased==true">{{"Thanks for purchasing from our Store " + ClientName}}</p>
+  <button type="button" class="btn btn-success mx-2" (click)=" renderValues()">display data</button>
+  <button type="button" class="btn btn-success mx-2" (click)=" originalPrice()">Show products with original
+    price</button>
+  <button type="button" class="btn btn-success mx-2" (click)=" discountedPrice()">Show products price after
+    discount</button>
+  <router-outlet></router-outlet>
+
 </div>
-
-<table *ngIf="IsPurshased==false" class="table my-3">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of ProductList">
-      <td>{{product.ID}}</td>
-      <td>{{product.Name}}</td>
-      <td>{{product.Quantity}}</td>
-      <td>{{product.Price}}</td>
-    </tr>
-  </tbody>
-</table>
-
-<input [(ngModel)]="ClientName" type="text" class="form-control" placeholder="Username" aria-label="Username">
-<button type="button" class="btn btn-success" (click)="IsPurshased=!IsPurshased">BUY</button>
-<button type="button" class="btn btn-success mx-3" (click)=" renderValues()">display data</button>
-
-<p *ngIf="IsPurshased==true">{{"Thanks for purchasing from our Store " + ClientName}}</p>

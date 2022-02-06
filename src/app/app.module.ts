@@ -12,7 +12,12 @@ import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { PostsComponent } from './posts/posts.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { HttpClientModule } from'@angular/common/http'
+import { HttpClientModule } from'@angular/common/http';
+import { PostDetalisComponent } from './post-detalis/post-detalis.component';
+import { WithDiscountComponent } from './with-discount/with-discount.component';
+import { WithoutDiscountComponent } from './without-discount/without-discount.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { HttpClientModule } from'@angular/common/http'
     HomeComponent,
     UsersComponent,
     PostsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PostDetalisComponent,
+    WithDiscountComponent,
+    WithoutDiscountComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
