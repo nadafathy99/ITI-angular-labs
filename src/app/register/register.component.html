@@ -1,26 +1,53 @@
-<form class="container">
+<form #registerForm="ngForm" (ngSubmit)="register(registerForm)" class="container">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Username</label>
-    <input type="username" class="form-control" id="exampleInputEmail1">
+    <input type="username" #username="ngModel" required name="username" ngModel pattern="^[a-zA-Z]+$"
+      class="form-control" id="exampleInputEmail1">
+
+    <div class="text-danger">
+      <p *ngIf="username.errors?.['required'] && username.touched">name is required</p>
+      <p *ngIf="username.errors?.['pattern'] && username.touched">username contains only upper and lower characters</p>
+    </div>
+
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="email" #email="ngModel" ngModel
+      pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+      required name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    <div class="text-danger">
+      <p *ngIf="email.errors?.['required'] && email.touched">Email is required</p>
+      <p *ngIf="email.errors?.['pattern'] && email.touched">Email is not valid</p>
+    </div>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <input type="password" #password="ngModel" ngModel required name="password" minlength="6" class="form-control"
+      id="exampleInputPassword1">
+    <div class="text-danger">
+      <p *ngIf="password.errors?.['required'] && password.touched">Password is required</p>
+      <p *ngIf="password.errors?.['minlength'] && password.touched">Password minimum length is 6 characters</p>
+    </div>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <input type="password" #confirmpassword="ngModel" ngModel required name="confirm-password" class="form-control"
+      id="exampleInputPassword1">
+    <div class="text-danger">
+      <p *ngIf="confirmpassword.errors?.['required'] && confirmpassword.touched">Required field</p>
+    </div>
   </div>
-  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+  <select #select="ngModel" ngModel required name="select" class="form-select form-select-lg mb-3"
+    aria-label=".form-select-lg example">
     <option selected disabled>How did you hear about us?</option>
     <option value="1">Twitter</option>
     <option value="2">Facebook</option>
     <option value="3">Google</option>
+    <div class="text-danger">
+      <p *ngIf="select.errors?.['required'] && select.touched">Required field</p>
+    </div>
   </select>
-  <button type="submit" class="btn btn-success">Register</button>
+  <button [disabled]="registerForm.invalid || isMatched(password,confirmpassword)" type="submit"
+    class="btn btn-success">Register</button>
 </form>

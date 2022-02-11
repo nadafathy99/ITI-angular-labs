@@ -1,12 +1,23 @@
-<form class="container">
+<form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="container">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="email" #email="ngModel" ngModel
+      pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+      required name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    <div class="text-danger">
+      <p *ngIf="email.errors?.['required'] && email.touched">Email is required</p>
+      <p *ngIf="email.errors?.['pattern'] && email.touched">Email is not valid</p>
+    </div>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <input type="password" #password="ngModel" ngModel required name="password" minlength="6" class="form-control"
+      id="exampleInputPassword1">
+    <div class="text-danger">
+      <p *ngIf="password.errors?.['required'] && password.touched">Password is required</p>
+      <p *ngIf="password.errors?.['minlength'] && password.touched">Password minimum length is 6 characters</p>
+    </div>
   </div>
-  <button type="submit" class="btn btn-success">Login</button>
+  <button [disabled]="loginForm.invalid" type="submit" class="btn btn-success">Login</button>
 </form>

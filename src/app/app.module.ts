@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductsComponent } from './products/products.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './filter.pipe';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
@@ -40,7 +40,8 @@ import { RegisterComponent } from './register/register.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule, 
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent] // bootstrapping component
